@@ -1,0 +1,88 @@
+<!-- postfeedback.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Feedback</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            margin-left: 460px;
+            border-radius: 5px;
+            margin-top: 8%;
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            width: 80%;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input, textarea {
+            height: 30px;
+            margin-bottom: 15px;
+            padding: 5px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Post Feedback</h2>
+        <form method="post"  >
+            {% csrf_token %}
+            
+            <label for="laptop">Laptop Serial Number:</label>
+            <input type="text" name="laptop" required>
+            
+            <label for="feedback">Feedback:</label>
+            <textarea name="feedback" required></textarea>
+
+            <label for="Date">Date:</label>
+            <input type="datetime-local" name="Date" required>
+            
+            <button type="submit" >Submit Feedback</button><br>
+        </form>
+    </div>
+</body>
+</html>

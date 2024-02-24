@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - View Allocated Laptops</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        /* .delete-button, .update-button {
+            padding: 5px;
+            background-color: #ff6347; /* Red color for delete button */
+            /* color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            border-radius: 3px;
+        } */ */
+
+       .update-button {
+            background-color: #4CAF50; 
+            height: 20px;
+            width: 80px;
+            font-size: 14px;
+            padding-top: 5px;
+        } 
+         .delete-button{
+            height: 30px;
+            width: 80px;
+            background-color: #ff6347;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            border-radius: 3px;
+            color: white;
+        }
+        .update-button{
+            background-color: #4CAF50;
+            height: 30px;
+            width: 80px;
+            font-size: 14px;
+           color: white;
+           
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            border-radius: 3px;
+        }
+        .add a{
+            text-decoration: none;
+            font-size: 14px;
+           color: white;
+           
+        }
+        .add button{
+            background-color: gray;
+            height: 30px;
+            width: 120px;
+            border-radius: 5px;
+            border:0;
+        }
+        .history a{
+            text-decoration: none;
+            font-size: 14px;
+           color: white;
+        }
+        .history button{
+            background-color: #4CAF50;
+            height: 30px;
+            width: 120px;
+            border-radius: 5px;
+            border:0;
+        }
+.all{
+    display: flex;
+    gap: 10px;
+}
+    </style>
+</head>
+<body>
+    <a href="{%url 'logout' %}" style="color: #3498db;">Logout</a>
+    <h2>Admin Panel- View and Allocated Laptops</h2>
+   <div class="all">
+    <div class="add">
+        <button><a href="{% url 'create' %}">Create New ➕
+        </a></button>
+
+    
+    </div>
+    <div class="add" ">
+        <button style="background-color: #ff6347;"><a href="{% url 'adminreservation' %}">Reservations
+        </a></button>
+
+    
+    </div>
+    <div class="history">
+        <button><a href="{% url 'history_list' %}">Chek History
+        </a></button>
+    </div>
+   </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Student</th>
+                <th>Laptop Serial Number</th>
+                <th>Check Out Time</th>
+                <th>Check In Time</th>
+                <th>Is Late</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in object_list %}
+                <tr>
+                    <td>{{ i.student }}</td>
+                    <td>{{ i.laptop.serial_number }}</td>
+                    <td>{{ i.check_out_time }}</td>
+                    <td>{{ i.check_in_time }}</td>
+                    <td>{{ i.is_late }}</td>
+                    <td class="action-buttons">
+                        <form method="post" action="{% url 'deleteadmin' i.id %}">
+                            {% csrf_token %}
+                            <button class="delete-button" >Delete</button>
+                        </form>
+                        <form method="get" action="{%url 'updatee' i.id %}">
+                            {% csrf_token %}
+                            <button class="update-button" type="submit">Update</button>
+                        </form>
+                    </td>
+                    
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

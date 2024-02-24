@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - View Allocated Laptops</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .button {
+            height: 30px;
+            width: 80px;
+            font-size: 14px;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            border-radius: 3px;
+        }
+
+        .delete-button {
+            background-color: #ff6347; /* Red color for delete button */
+        }
+
+        .update-button {
+            background-color: #4CAF50; /* Green color for update button */
+        }
+
+        .add-button {
+            background-color: #4CAF50; 
+            width: 110px;
+            /* Green color for add and history buttons */
+        }
+        .add-button a{
+            text-decoration: none;
+            color: white;
+        }
+
+        .add, .history {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .btn button{
+             width: 90px;
+             height: 30px;
+             border: 0;
+             border-radius: 3px;
+             color: white;
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Reservations</h2>
+    
+    <div class="all" style="display: flex; gap: 10px;">
+        <div class="add">
+            <button class="button add-button" style="background-color: rgb(109, 109, 255);"><a href="{% url 'userpage' %}">Back</a></button>
+        </div>
+       
+        <div class="add">
+            
+            <button class="button add-button"><a href="{% url 'reservation' %}">Create New ➕</a></button>
+        </div>
+
+       
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Laptop Serial Number</th>
+                <th>Model</th>
+                <th>Check Out Time</th>
+                <th>Check In Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in object_list %}
+                <tr>
+                    <td>{{ i.laptop.serial_number }}</td>
+                    <td>{{ i.laptop.model}}</td>
+                    <td>{{ i.fromtime }}</td>
+                    <td>{{ i.totime}}</td>
+                    <td class="action-buttons">
+                      <div class="btn" style="display: flex; gap: 10px;">
+                        <div class="d">
+                            <form method="post" action="{% url 'deletereservation' i.id %}">
+                                {% csrf_token %}
+                                <button class="delete-button" >Delete</button>
+                            </form>
+                        </div>
+                            
+                        
+                        
+                      </div>
+                        
+                    </td>
+                    
+                   
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

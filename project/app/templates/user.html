@@ -1,0 +1,98 @@
+<!-- user_history.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User History</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .button-container {
+            display: flex;
+            margin-top: 20px;
+            gap: 10px;
+            margin-left: 1100px;
+        }
+
+        .button-container button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .reservation-button {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        .feedback-button {
+            background-color: #3498db;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <a href="{%url 'logout' %}" style="color: #3498db;">Logout</a>
+    <h2>Hello <span style="color: #4caf50;">{{user}}</span> Your Transaction history is here..</h2>
+    <div class="button-container">
+        <a href="{% url 'listreser'%}"><button class="reservation-button" >Reservation</button></a>
+        
+        <a href="{% url 'post_feedback' %}"><button class="feedback-button" >Feedback</button></a>
+    </div>
+    
+    {% if history %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Laptop Serial Number</th>
+                    <th>Model</th>
+                    <th>Check out time</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in history %}
+                    <tr>
+                        <td>{{ reservation.laptop.serial_number }}</td>
+                        <td>{{ reservation.laptop.model }}</td>
+                        <td>{{ reservation.time}}</td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No Recent Transactions</p>
+    {% endif %}
+
+ 
+</body>
+</html>

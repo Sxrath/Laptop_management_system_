@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Acme&family=Big+Shoulders+Inline+Text:wght@100&family=Cinzel:wght@400;600&family=DM+Sans:opsz@9..40&family=Dela+Gothic+One&family=Hind+Siliguri&family=Lato&family=Manrope:wght@200&family=Merriweather:wght@300;400&family=Nunito+Sans:ital,opsz,wght@1,6..12,200&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;1,200&family=Questrial&family=Righteous&family=Roboto&family=Rowdies:wght@300&family=Sofia+Sans+Condensed:wght@1&family=Space+Mono&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+</head>
+<style>
+    body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        
+    body{
+        display: flex;
+        flex-direction: column;
+        
+        justify-content: center;
+        align-items: center;
+    }
+    button{
+        margin-left: 32%;
+        margin-bottom: 50px;
+        background-color: #4caf50;
+        height: 50px;
+        width: 100px;
+        border-radius: 25px;
+        border: 0;
+        font-family: poppins;
+        color: white;
+    }
+    ::placeholder {
+            padding-left:10px;
+        }
+    .container{
+        border-radius: 5px;
+        margin-top: 5%;
+        width: 450px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+    }
+    input{
+        font-family: poppins;
+        width: 400px;
+        font-size: 18px;
+        height: 50px;
+        margin-bottom:10px ;
+        border-radius: 5px;
+        border: 1px solid black;    }
+    .reg{
+        font-family: lato;
+        
+    }
+    .reg h2 {
+        font-weight: bold;
+        color: rgb(131, 125, 125);
+    }
+</style>
+<body>
+    
+    <div class="container">
+        <div class="reg">
+            <h2>Sign Up</h2>
+        </div>
+    <form method="post" action="{% url 'registration' %}">
+        {% csrf_token %}
+        
+    <div>
+        <input type="text" name="username" required placeholder="User Name"><br>
+    </div>
+       
+        <input type="text" name="first_name" required placeholder="First Name"><br>
+    <div>
+    <div>
+        <input type="text" name="last_name" required placeholder="Last Name"><br>
+    </div>
+    <div>
+        <input type="email" name="email" required placeholder="Email"><br>
+    </div>
+        <div>
+        <input type="password" name="Password" required placeholder="Password"><br>
+    </div>
+        <div style=""> 
+            <button type="submit">Register</button>
+        </div>
+        <div class="log"  style=" padding-bottom: 20px;">
+            Already have an account? <a href="{%url 'login'%}">Log In!</a>
+        </div>
+    </form>
+    
+    </div>
+</body>
+</html>
